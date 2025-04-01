@@ -1,0 +1,32 @@
+export default [
+  {
+    _id: "A101",
+    title: "HTML Basics Assignment",
+    description: "Create a basic HTML page with different elements",
+    course: "CS101",
+    points: 100,
+    dueDate: "2023-02-15",
+    availableFromDate: "2023-02-01",
+    availableUntilDate: "2023-02-15",
+  },
+  {
+    _id: "A102",
+    title: "CSS Styling Assignment",
+    description: "Style your HTML page using CSS",
+    course: "CS101",
+    points: 100,
+    dueDate: "2023-03-15",
+    availableFromDate: "2023-03-01",
+    availableUntilDate: "2023-03-15",
+  },
+  {
+    _id: "A103",
+    title: "JavaScript DOM Assignment",
+    description: "Add interactivity to your webpage using JavaScript",
+    course: "CS101",
+    points: 100,
+    dueDate: "2023-04-15",
+    availableFromDate: "2023-04-01",
+    availableUntilDate: "2023-04-15",
+  },
+]; 
