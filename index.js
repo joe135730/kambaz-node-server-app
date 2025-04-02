@@ -6,6 +6,7 @@ import cors from "cors";
 import UserRoutes from "./Kambaz/Users/routes.js";
 import CourseRoutes from "./Kambaz/Courses/routes.js";
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
+import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
 import "dotenv/config";
 
 const app = express(); // create new express
@@ -39,5 +40,6 @@ Hello(app); // pass app reference to Hello
 UserRoutes(app);
 CourseRoutes(app);
 ModuleRoutes(app);
+AssignmentRoutes(app);
 
 app.listen(process.env.PORT || 4000); // listen to http://localhost:4000
