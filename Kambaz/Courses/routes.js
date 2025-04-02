@@ -4,4 +4,10 @@ export default function CourseRoutes(app) {
     const courses = dao.findAllCourses();
     res.send(courses);
   });
+  
+  app.get("/api/courses/enrolled/:userId", (req, res) => {
+    const userId = req.params.userId;
+    const enrolledCourses = dao.findCoursesForEnrolledUser(userId);
+    res.send(enrolledCourses);
+  });
 }
