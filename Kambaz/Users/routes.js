@@ -37,13 +37,18 @@ export default function UserRoutes(app) {
   };
   app.post("/api/users/signin", signin);
 
+  // Profile
   const profile = async (req, res) => {
     res.json(currentUser);
   };
+  app.post("/api/users/profile", profile);
 
-  const signout = (req, res) => {};
-
-
+  // Signout
+  const signout = (req, res) => {
+    currentUser = null;
+    res.sendStatus(200);
+  };
+  app.post("/api/users/signout", signout);
 
   app.get("/api/users", findAllUsers);
   app.get("/api/users/:userId", findUserById);
@@ -51,6 +56,6 @@ export default function UserRoutes(app) {
   app.delete("/api/users/:userId", deleteUser);
   app.post("/api/users/signup", signup);
 
-  app.post("/api/users/signout", signout);
-  app.post("/api/users/profile", profile);
+
+
 }
