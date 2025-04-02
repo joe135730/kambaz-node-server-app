@@ -29,21 +29,8 @@ export default function ModuleRoutes(app) {
     }
   });
 
-  // Update a module
-  app.put("/api/courses/:courseId/modules/:moduleId", (req, res) => {
-    try {
-      const { moduleId } = req.params;
-      const updates = req.body;
-      const updatedModule = dao.updateModule(moduleId, updates);
-      res.json(updatedModule);
-    } catch (error) {
-      console.error("Error updating module:", error);
-      res.status(400).json({ error: error.message });
-    }
-  });
-
   // Delete a module
-  app.delete("/api/courses/:courseId/modules/:moduleId", (req, res) => {
+  app.delete("/api/modules/:moduleId", (req, res) => {
     try {
       const { moduleId } = req.params;
       const result = dao.deleteModule(moduleId);
@@ -53,4 +40,28 @@ export default function ModuleRoutes(app) {
       res.status(400).json({ error: error.message });
     }
   });
-} 
+
+  // Update a module
+  app.put("/api/modules/:moduleId", (req, res) => {
+    try {
+      const { moduleId } = req.params;
+      const moduleUpdates = req.body;
+      const updatedModule = dao.updateModule(moduleId, moduleUpdates);
+      res.json(updatedModule);
+    } catch (error) {
+      console.error("Error updating module:", error);
+      res.status(400).json({ error: error.message });
+    }
+  });
+
+  // app.delete("/api/courses/:courseId/modules/:moduleId", (req, res) => {
+  //   try {
+  //     const { moduleId } = req.params;
+  //     const result = dao.deleteModule(moduleId);
+  //     res.json(result);
+  //   } catch (error) {
+  //     console.error("Error deleting module:", error);
+  //     res.status(400).json({ error: error.message });
+  //   }
+  // });
+}

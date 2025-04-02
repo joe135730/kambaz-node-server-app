@@ -27,12 +27,27 @@ export function createModule(module) {
 }
 
 export function updateModule(moduleId, updates) {
+  // Find the module
   const index = Database.modules.findIndex(m => m._id === moduleId);
   if (index === -1) {
     throw new Error("Module not found");
   }
-  Database.modules[index] = { ...Database.modules[index], ...updates };
-  return Database.modules[index];
+
+  // Get the current module
+  const currentModule = Database.modules[index];
+
+  // Create updated module with default values preserved
+  const updatedModule = {
+    ...currentModule,
+    ...updates,
+    _id: moduleId, // Ensure ID doesn't change
+    course: updates.course || currentModule.course, // Ensure course doesn't get lost
+    lessons: updates.lessons || currentModule.lessons || [] // Ensure lessons are preserved
+  };
+
+  // Update in database
+  Database.modules[index] = updatedModule;
+  return updatedModule;
 }
 
 export function deleteModule(moduleId) {
@@ -43,4 +58,3 @@ export function deleteModule(moduleId) {
   Database.modules.splice(index, 1);
   return { success: true };
 }
-  
