@@ -10,4 +10,11 @@ export default function CourseRoutes(app) {
     const enrolledCourses = dao.findCoursesForEnrolledUser(userId);
     res.send(enrolledCourses);
   });
+
+  app.delete("/api/courses/:courseId", (req, res) => {
+    const { courseId } = req.params;
+    const status = dao.deleteCourse(courseId);
+    res.send(status);
+  });
+
 }
