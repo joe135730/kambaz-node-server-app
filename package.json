@@ -30,7 +30,9 @@
   "homepage": "https://github.com/joe135730/kambaz-node-server-app#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "express-session": "^1.18.1",
     "uuid": "^11.1.0"
   }
 }
