@@ -1,7 +1,7 @@
 import PathParameters from "./PathParameters.js";
 import QueryParameters from "./QueryParameters.js";
 import WorkingWithObjects from "./WorkingWithObjects.js";
-import Module from "./module/module.js";
+import Module from "./module/Module.js";
 import WorkingWithArrays from "./WorkingWithArrays.js";
 
 
