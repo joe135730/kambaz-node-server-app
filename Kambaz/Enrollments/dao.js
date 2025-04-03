@@ -28,3 +28,8 @@ export function unenrollUserFromCourse(userId, courseId) {
   Database.enrollments.splice(index, 1);
   return { success: true };
 }
+
+export function findUserEnrollments(userId) {
+  const { enrollments } = Database;
+  return enrollments.filter(enrollment => enrollment.user === userId);
+}

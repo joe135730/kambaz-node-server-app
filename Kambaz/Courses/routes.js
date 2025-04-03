@@ -14,6 +14,13 @@ export default function CourseRoutes(app) {
     res.send(enrolledCourses);
   });
 
+  // Get all enrollments for a user
+  app.get("/api/courses/enrollments/:userId", (req, res) => {
+    const userId = req.params.userId;
+    const enrollments = enrollmentsDao.findUserEnrollments(userId);
+    res.send(enrollments);
+  });
+
   // Add new course
   app.post("/api/courses", (req, res) => {
     const newCourse = dao.createCourse(req.body);

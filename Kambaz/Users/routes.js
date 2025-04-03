@@ -92,4 +92,5 @@ export default function UserRoutes(app) {
     res.json(courses);
   };
   app.get("/api/users/:userId/courses", findCoursesForEnrolledUser);
+
 }
