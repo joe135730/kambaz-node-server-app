@@ -22,7 +22,10 @@ export default function UserRoutes(app) {
     res.json(users);
   };
 
-  const findUserById = (req, res) => {};
+  const findUserById = async (req, res) => {
+    const user = await dao.findUserById(req.params.userId);
+    res.json(user);
+  };
 
   // Create Course
   const createCourse = (req, res) => {
