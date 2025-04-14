@@ -40,12 +40,14 @@ export default function UserRoutes(app) {
   app.post("/api/users/current/courses", createCourse);
 
   // Update
-  const updateUser = (req, res) => {
+  const updateUser = async (req, res) => {
     const userId = req.params.userId;
     const userUpdates = req.body;
-    dao.updateUser(userId, userUpdates);
-    const currentUser = dao.findUserById(userId);
-    req.session["currentUser"] = currentUser;
+    await dao.updateUser(userId, userUpdates);
+    const currentUser = req.session["currentUser"];
+    if (currentUser && currentUser._id === userId) {
+      req.session["currentUser"] = { ...currentUser, ...userUpdates };
+    } 
     res.json(currentUser);
   };
   app.put("/api/users/:userId", updateUser);
