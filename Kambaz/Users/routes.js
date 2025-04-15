@@ -153,6 +153,7 @@ export default function UserRoutes(app) {
   app.delete("/api/users/:userId", deleteUser);
   app.post("/api/users/signup", signup);
 
+  // Find course for enrolled user
   const findCoursesForEnrolledUser = (req, res) => {
     let { userId } = req.params;
     if (userId === "current") {
