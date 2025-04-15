@@ -3,11 +3,18 @@ import * as enrollmentsDao from "../Enrollments/dao.js";
 import * as modulesDao from "../Modules/dao.js";
 
 export default function CourseRoutes(app) {
+  // Get all courses
   app.get("/api/courses", async (req, res) => {
-    const courses = await dao.findAllCourses();
-    res.send(courses);
+    try {
+      const courses = await dao.findAllCourses();
+      res.send(courses);
+    } catch (error) {
+      console.error("Error fetching all courses:", error);
+      res.status(500).json({ error: error.message });
+    }
   });
 
+  // Filter endrolled course 
   app.get("/api/courses/enrolled/:userId", (req, res) => {
     const userId = req.params.userId;
     const enrolledCourses = dao.findCoursesForEnrolledUser(userId);
@@ -22,24 +29,24 @@ export default function CourseRoutes(app) {
   });
 
   // Add new course
-  app.post("/api/courses", (req, res) => {
-    const newCourse = dao.createCourse(req.body);
+  app.post("/api/courses", async (req, res) => {
+    const newCourse = await dao.createCourse(req.body);
     res.json(newCourse);
   });
 
   // Delete course
-  app.delete("/api/courses/:courseId", (req, res) => {
+  app.delete("/api/courses/:courseId", async (req, res) => {
     const { courseId } = req.params;
-    dao.deleteCourse(courseId);
-    res.sendStatus(200);
+    const status = await dao.deleteCourse(courseId);
+    res.send(status);
   });
 
   // Update course
-  app.put("/api/courses/:courseId", (req, res) => {
+  app.put("/api/courses/:courseId", async (req, res) => {
     const { courseId } = req.params;
     const courseUpdates = req.body;
-    const updatedCourse = dao.updateCourse(courseId, courseUpdates);
-    res.json(updatedCourse);
+    const status = await dao.updateCourse(courseId, courseUpdates);
+    res.send(status);
   });
 
   // Enroll user in course
@@ -81,6 +88,4 @@ export default function CourseRoutes(app) {
     const newModule = modulesDao.createModule(module);
     res.send(newModule);
   });
-
-
 }
