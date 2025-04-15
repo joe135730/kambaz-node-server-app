@@ -51,10 +51,5 @@ export function updateModule(moduleId, updates) {
 }
 
 export function deleteModule(moduleId) {
-  const index = Database.modules.findIndex(m => m._id === moduleId);
-  if (index === -1) {
-    throw new Error("Module not found");
-  }
-  Database.modules.splice(index, 1);
-  return { success: true };
+  return model.deleteOne({ _id: moduleId });
 }

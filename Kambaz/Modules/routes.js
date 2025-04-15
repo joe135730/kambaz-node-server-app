@@ -30,10 +30,10 @@ export default function ModuleRoutes(app) {
   });
 
   // Delete a module
-  app.delete("/api/modules/:moduleId", (req, res) => {
+  app.delete("/api/modules/:moduleId", async (req, res) => {
     try {
       const { moduleId } = req.params;
-      const result = dao.deleteModule(moduleId);
+      const result = await dao.deleteModule(moduleId);
       res.json(result);
     } catch (error) {
       console.error("Error deleting module:", error);
