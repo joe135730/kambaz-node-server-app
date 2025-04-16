@@ -30,8 +30,17 @@ export default function CourseRoutes(app) {
 
   // Add new course
   app.post("/api/courses", async (req, res) => {
-    const newCourse = await dao.createCourse(req.body);
-    res.json(newCourse);
+    try {
+      const newCourse = await dao.createCourse(req.body);
+      const currentUser = req.session["currentUser"];
+      if (currentUser) {
+        await enrollmentsDao.enrollUserInCourse(currentUser._id, newCourse._id);
+      }
+      res.json(newCourse);
+    } catch (error) {
+      console.error("Error creating course:", error);
+      res.status(500).json({ message: "Error creating course" });
+    }
   });
 
   // Delete course
