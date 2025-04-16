@@ -21,10 +21,17 @@ app.use(
     origin: [
       process.env.NETLIFY_URL || "http://localhost:5173",
       "https://a6--cheyiwu-kambaz-react-web-app.netlify.app",
-      /\.netlify\.app$/, // Allow all netlify.app subdomains
+      /\.netlify\.app$/,
+      "http://localhost:5173" // Explicitly allow localhost:5173
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: [
+      'Content-Type', 
+      'Authorization',
+      'X-Test',
+      'X-Debug-Info',
+      'X-Requested-With'
+    ],
   })
 );
 
