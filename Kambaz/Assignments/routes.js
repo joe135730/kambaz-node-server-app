@@ -3,6 +3,19 @@ import * as dao from "./dao.js";
 export default function AssignmentRoutes(app) {
   console.log("Registering Assignment Routes...");
   
+  // 添加路由请求监控
+  app.use("/api/assignments/:assignmentId", (req, res, next) => {
+    console.log(`***** ASSIGNMENT ROUTE HIT: ${req.method} ${req.url} *****`);
+    console.log("Params:", req.params);
+    console.log("Query:", req.query);
+    
+    if (req.method === "PUT") {
+      console.log("PUT Body:", JSON.stringify(req.body, null, 2));
+    }
+    
+    next();
+  });
+  
   // Get all assignments
   app.get("/api/assignments", async (req, res) => {
     try {
