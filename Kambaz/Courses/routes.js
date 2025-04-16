@@ -97,4 +97,16 @@ export default function CourseRoutes(app) {
     const newModule = await modulesDao.createModule(module);
     res.send(newModule);
   });
+
+  // Get users enrolled in a course
+  app.get("/api/courses/:cid/users", async (req, res) => {
+    try {
+      const { cid } = req.params;
+      const users = await enrollmentsDao.findUsersForCourse(cid);
+      res.json(users);
+    } catch (error) {
+      console.error("Error finding users for course:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
 }
